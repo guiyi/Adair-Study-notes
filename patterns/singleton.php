@@ -64,4 +64,5 @@ unset($mysql);
 $mysql1 = Preferences::getInstance();
 $db = $mysql1->conn('mysql');
 echo $db."</BR>";
+
 ?>
