@@ -85,6 +85,7 @@ class NbaPlayer extends Human
     }
 }
 
+
 // 类名加“::”可以访问类的静态成员
 // 静态成员不需要实例化就可以访问
 echo "The president is ". NbaPlayer::$president. "\n";
