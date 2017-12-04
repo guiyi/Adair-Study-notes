@@ -33,6 +33,7 @@ class Animal extends ACanEat {
   }
 }
 
+
 $man = new Human();
 $man->eat("Apple");
 $man->breath(); // 和Animal共用了抽象类ICanEat的breath方法
