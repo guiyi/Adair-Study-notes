@@ -14,6 +14,7 @@ class MagicTest{
   }
 }
 
+
 $obj =  new MagicTest();
 echo $obj;
 $obj(5);
