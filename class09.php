@@ -52,4 +52,5 @@ class Human1 implements ICanPee{
 }
 
 // 回到PPT总结接口和类的区别
+
 ?>
