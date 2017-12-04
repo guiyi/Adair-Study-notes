@@ -80,5 +80,4 @@ $jordan->run();
 $jordan->pass();
 $jordan->eat("apple"); // 只要是Human类的子类的对象，就可以调用eat方法
 
-
 ?>
