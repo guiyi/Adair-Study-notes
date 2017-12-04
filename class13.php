@@ -25,4 +25,5 @@ $obj =  new MagicTest();
 $obj->runTest("para1", "para2");
 MagicTest::runTest("para3","para4");
 
+
 ?>
