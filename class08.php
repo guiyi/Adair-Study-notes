@@ -41,4 +41,5 @@ class ChildClass extends BaseClass {
 // Results in Fatal error: Cannot override final method BaseClass::moreTesting()
 $obj = new ChildClass();
 $obj->moreTesting();
+
 ?>
