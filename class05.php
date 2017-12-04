@@ -81,4 +81,5 @@ echo $jordan->getAge()."\n";
 // step3，证明private的属性只能被自身访问
 // 把这行代码添加到构造函数试试
 echo $this->isHungry."\n";
+
 ?>
