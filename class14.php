@@ -44,4 +44,5 @@ $obj->name = "Name Value";
 echo '$obj->name is set? '. isset($obj->name) . "\n";
 echo '$obj->name is empty?' . empty($obj->name) . "\n";
 unset($obj->name);
+
 ?>
