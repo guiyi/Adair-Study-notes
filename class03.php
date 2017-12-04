@@ -80,4 +80,5 @@ echo "From now on James will not be used anymore.\n";
 // 当程序执行结束时，所有类的对象的析构函数都会自动被调用
 
 // 用一页PPT展示说明对象引用的概念
+
 ?>
