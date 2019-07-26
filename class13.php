@@ -27,3 +27,8 @@ MagicTest::runTest("para3","para4");
 
 
 ?>
+
+
+rst:
+Calling runTest with parameters: para1, para2
+Static calling runTest with parameters: para3, para4
