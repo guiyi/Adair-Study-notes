@@ -12,7 +12,7 @@ class Human{
     public $weight;
 
     public function eat($food){
-        echo $this->name . "'s eating ". $food. "\n";
+        echo $this->name . "'s eating ". $food. "\n<BR \>";
     }
 }
 
@@ -27,12 +27,12 @@ class NbaPlayer extends Human
 
     // 默认的构造函数，在对象被实例化的时候自动调用
     /*function __construct() {
-       print "In NbaPlayer constructor\n";
+       print "In NbaPlayer constructor\n<BR \>";
     }*/
 
     // 构造函数通常用于初始化对象的属性值
     function __construct($name, $height, $weight, $team, $playerNumber) {
-        print $name . ";" . $height . ";" . $weight . ";" . $team . ";" . $playerNumber."\n";
+        print $name . ";" . $height . ";" . $weight . ";" . $team . ";" . $playerNumber."\n<BR \>";
        $this->name = $name; // $this是php里面的伪变量，表示对象自身
        $this->height = $height; // 通过$this可以设置对象的属性值
        $this->weight = $weight;
@@ -43,28 +43,28 @@ class NbaPlayer extends Human
     // 析构函数，用于清理程序中使用的系统资源，比如释放打开的文件等等
     // 析构函数在该对象不会再被使用的情况下自动调用
     function __destruct() {
-       print "Destroying " . $this->name . "\n";
+       print "Destroying " . $this->name . "\n<BR \>";
     }
 
     // 类的方法的定义
     public function run() {
-        echo "Running\n";
+        echo "Running\n<BR \>";
     }
 
     public function jump(){
-        echo "Jumping\n";
+        echo "Jumping\n<BR \>";
     }
     public function dribble(){
-        echo "Dribbling\n";
+        echo "Dribbling\n<BR \>";
     }
     public function shoot(){
-        echo "Shooting\n";
+        echo "Shooting\n<BR \>";
     }
     public function dunk(){
-        echo "Dunking\n";
+        echo "Dunking\n<BR \>";
     }
     public function pass(){
-        echo "Passing\n";
+        echo "Passing\n<BR \>";
     }
 }
 
@@ -74,7 +74,7 @@ class NbaPlayer extends Human
  */
 $jordan = new NbaPlayer("Jordan", "198cm", "98kg", "Bull", "23");
 // 访问对象的属性使用的语法是->符号，后面跟着属性的名称
-echo $jordan->name."\n";
+echo $jordan->name."\n<BR \>";
 // 调用对象的某个方法使用的语法是->符号，后面跟着方法的名称和一对括号
 $jordan->run();
 $jordan->pass();

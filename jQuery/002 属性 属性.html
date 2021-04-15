@@ -1,0 +1,64 @@
+<html>
+
+<head>
+<title>002 属性 属性</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//attr()获取和设置属性值
+	console.log($("img").attr("src"));
+	console.log($("img").attr("title"));
+	$("img").attr({ src: "https://dfimg.dfrobot.com/store/data/DFR0543/20201123%20Update/Picture%20LattePanda%20Delta_300x200.jpg", title: "Test Image" });
+
+
+	$("img").attr("title", function() { 
+		console.log('function '+this.alt) ; 
+	});
+
+	//removeAttr(name) 从每一个匹配的元素中删除一个属性
+	$("img").removeAttr("title");
+
+
+	//prop(name|properties|key,value|fn) 获取匹配的元素集中第一个元素的属性（property）值或设置每一个匹配元素的一个或多个属性。
+	$("input[type='checkbox']").prop("checked", true);
+	$("input[type='radio']").prop("checked", false);
+	$("input[type='radio']").prop("checked", function( i, val ) {
+	  console.log(i,val) ;
+	});
+
+	//removeProp(name)  用来删除由.prop()方法设置的属性集
+	$("input[type='checkbox']").removeProp("checked", true);
+	$("input[type='radio']").removeProp("checked", true);
+
+	//addClass(class|fn) 为每个匹配的元素添加指定的类名。
+	$("p").addClass("selected");
+	$("p").addClass("selected1 selected2");
+
+	$('ul li:last').addClass(function() {
+	  console.log('item-' + $(this).index()) ;
+	  return 'item-' + $(this).index();
+	});
+});
+</script>
+</head>
+
+<body>
+<img src="https://www.dfrobot.com/static/images/logo.png"  title="DFRobot title" alt="DFRobot alt">
+<img src="https://www.dfrobot.com/static/images/logo.png"  title="DFRobot title1" alt="DFRobot alt1">
+
+<p>
+<input type="checkbox" value="check1"/> check1
+<input type="checkbox" value="check2"/> check2
+<input type="radio" value="radio1"/> radio1
+<input class="radio_class" type="radio" value="radio2"/> radio2
+</p>
+
+<ul>
+      <li>Hello</li>
+      <li>Hello</li>
+      <li>Hello</li>
+</ul>
+
+</body>
+
+</html>

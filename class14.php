@@ -9,27 +9,27 @@ date_default_timezone_set("PRC");
  */
 class MagicTest{
   public function __tostring(){
-    return "This is the Class MagicTest.\n";
+    return "This is the Class MagicTest.\n<BR \>";
   }
   public function __invoke($x){
-    echo "__invoke called with parameter " . $x . "\n";
+    echo "__invoke called with parameter " . $x . "\n<BR \>";
   }
   public function __call($name, $arguments){
-    echo "Calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n";
+    echo "Calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n<BR \>";
   }
   public static function __callStatic($name, $arguments){
-    echo "Static calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n";
+    echo "Static calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n<BR \>";
   }
   // 通过这两个方法可以实现动态的对象属性
   public function __get($name){
     return "Getting the property " . $name;
   }
   public function __set($name, $value){
-    echo "Setting the property " . $name . " to value ". $value. "\n";
+    echo "Setting the property " . $name . " to value ". $value. "\n<BR \>";
   }
 
   public function __isset($name){
-    echo "__isset invoked\n";
+    echo "__isset invoked\n<BR \>";
     return false;
   }
 
@@ -39,10 +39,18 @@ class MagicTest{
 }
 
 $obj =  new MagicTest();
-echo $obj->name . "\n";
+echo $obj->name . "\n<BR \>";
 $obj->name = "Name Value";
-echo '$obj->name is set? '. isset($obj->name) . "\n";
-echo '$obj->name is empty?' . empty($obj->name) . "\n";
+echo '$obj->name is set? '. isset($obj->name) . "\n<BR \>";
+echo '$obj->name is empty?' . empty($obj->name) . "\n<BR \>";
 unset($obj->name);
 
-?>
+/*
+Getting the property name
+Setting the property name to value Name Value
+__isset invoked
+$obj->name is set?
+__isset invoked
+$obj->name is empty?1
+unsetting property name
+*/

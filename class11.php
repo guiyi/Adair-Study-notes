@@ -14,7 +14,7 @@ abstract class ACanEat {
    abstract public function eat($food);
 
    public function breath(){
-      echo "Breath use the air.\n";
+      echo "Breath use the air.\n<BR \>";
    }
 }
 
@@ -22,14 +22,14 @@ abstract class ACanEat {
 class Human extends ACanEat { 
   // 跟Animal类的实现是不同的
   public function eat($food){
-    echo "Human eating " . $food . "\n";
+    echo "Human eating " . $food . "\n<BR \>";
   }
 }
 
 // Animal类实现了ICanEat接口
 class Animal extends ACanEat {
   public function eat($food){
-    echo "Animal eating " . $food . "\n";
+    echo "Animal eating " . $food . "\n<BR \>";
   }
 }
 
@@ -41,4 +41,9 @@ $monkey = new Animal();
 $monkey->eat("Banana");
 $monkey->breath();
 
-?>
+/*
+Human eating Apple
+Breath use the air.
+Animal eating Banana
+Breath use the air. 
+*/

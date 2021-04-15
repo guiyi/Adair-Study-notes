@@ -9,11 +9,11 @@ date_default_timezone_set("PRC");
 
 class BaseClass {
    public function test() {
-       echo "BaseClass::test() called\n";
+       echo "BaseClass::test() called\n<BR \>";
    }
    
    public function moreTesting() {
-       echo "BaseClass::moreTesting() called\n";
+       echo "BaseClass::moreTesting() called\n<BR \>";
    }
 }
 
@@ -22,24 +22,37 @@ class ChildClass extends BaseClass {
   private static $sValue = "static value";
   const CONST_VALUE = 'A constant value';
   public function moreTesting() {
-       echo "ChildClass::moreTesting() called\n";
+       echo "ChildClass::moreTesting() called\n<BR \>";
        parent::moreTesting(); // parent关键字可以访问父类被重写的成员
        // step 3 self关键字可以访问该类自身的其他成员
        self::called();
+       $this->called();
        // step 4 self关键字可以访问该类定义的常量
-       echo "CONST_VALUE: " . self::CONST_VALUE."\n";
+       echo "CONST_VALUE: " . self::CONST_VALUE."\n<BR \>";
        // 常量不能被赋值修改
        // self::CONST_VALUE = 11;
        // step 5 static关键字可以访问静态成员，当调用静态属性时记得加$符号
-       echo "sValue: " . static::$sValue."\n";
+       echo "sValue: " . static::$sValue."\n<BR \>";
+       echo "sValue: " . self::$sValue."\n<BR \>";
   }
   // step 3
   public function called(){
-    echo "ChildClass::called() called\n";
+    echo "ChildClass::called() called\n<BR \>";
   }
  }
 // Results in Fatal error: Cannot override final method BaseClass::moreTesting()
 $obj = new ChildClass();
 $obj->moreTesting();
 
-?>
+
+
+/*
+
+ChildClass::moreTesting() called
+BaseClass::moreTesting() called
+ChildClass::called() called
+CONST_VALUE: A constant value
+sValue: static value
+sValue: static value 
+
+*/

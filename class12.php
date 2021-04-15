@@ -7,10 +7,11 @@ date_default_timezone_set("PRC");
  */
 class MagicTest{
   public function __tostring(){
-    return "This is the Class MagicTest.\n";
+    return "This is the Class MagicTest.\n<BR \>";
   }
+  
   public function __invoke($x){
-    echo "__invoke called with parameter " . $x . "\n";
+    echo "__invoke called with parameter " . $x . "\n<BR \>";
   }
 }
 
@@ -19,4 +20,7 @@ $obj =  new MagicTest();
 echo $obj;
 $obj(5);
 
-?>
+/*
+This is the Class MagicTest.
+__invoke called with parameter 5
+*/

@@ -18,14 +18,14 @@ interface ICanEat {
 class Human implements ICanEat { 
   // 跟Animal类的实现是不同的
   public function eat($food){
-    echo "Human eating " . $food . "\n";
+    echo "Human eating " . $food . "\n<BR \>";
   }
 }
 
 // Animal类实现了ICanEat接口
 class Animal implements ICanEat {
   public function eat($food){
-    echo "Animal eating " . $food . "\n";
+    echo "Animal eating " . $food . "\n<BR \>";
   }
 }
 
@@ -53,4 +53,12 @@ class Human1 implements ICanPee{
 
 // 回到PPT总结接口和类的区别
 
-?>
+
+
+/*
+Human eating Apple
+Animal eating Banana
+bool(true)
+Fatal error: Class Human1 contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (ICanEat::eat) in /Users/Shared/Relocated Items/Security/data/www/PHP/class09.php on line 50
+
+*/

@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<title>001 属性 HTML代码/文本/值</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  	// html()
+    /*console.log($("p").html()); //取得第一个匹配元素的html内容。这个函数不能用于XML文档。但可以用于XHTML文档。
+    $("p").html("Hello <b>world</b>!"); //设置所有 p 元素的内容
+
+    $("p").html(function(n){ //使用函数来设置所有匹配元素的内容。
+    	return "这个 p 元素的 index 是：" + n;
+    });
+
+    // text()
+    console.log($("p").text()); //取得所有匹配元素的内容。 结果是由所有匹配元素包含的文本内容组合起来的文本。这个方法对HTML和XML文档都有效。
+    $("p").text("Hello <b>world</b>!"); //设置所有 p 元素的内容
+
+    $("p").text(function(n){ //使用函数来设置所有匹配元素的文本内容。
+    	return "这个 p 元素的 index 是：" + n;
+    });*/
+
+    //val()
+    console.log($("input").val()); //check1  获得匹配元素的当前值。
+  	//$("input").val("val checked"); //设定所有匹配文本框的值
+
+  	$('input').val(function() {
+	  console.log(this.value + ' -- ' + this.className) ;
+	});
+
+	$("#single").val("Single2"); //设置id="single" select 选择的option值是  Single2
+	$("#multiple").val(["Multiple2", "Multiple3"]);//设置id="multiple" select 选择的option值是 Multiple2 Multiple3
+	$("input").val(["check2"."radio1"]);
+});
+</script>
+	
+</script>
+</head>
+
+<body>
+<p>body 元素的内容会显示在浏览器中。</p>
+<p>title 元素的内容会显示在浏览器的标题栏中。</p>
+
+
+
+<select id="single">
+  <option>Single</option>
+  <option>Single2</option>
+</select>
+<select id="multiple" multiple="multiple">
+  <option selected="selected">Multiple</option>
+  <option>Multiple2</option>
+  <option selected="selected">Multiple3</option>
+</select><br/>
+<input type="checkbox" value="check1"/> check1
+<input type="checkbox" value="check2"/> check2
+<input type="radio" value="radio1"/> radio1
+<input class="radio_class" type="radio" value="radio2"/> radio2
+</body>
+
+</html>

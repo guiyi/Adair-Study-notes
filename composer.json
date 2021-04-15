@@ -1,0 +1,14 @@
+{
+    "name": "phpunit/phpunit",
+    "description": "test",
+    "authors": [
+        {
+            "name": "126",
+            "email": "zouhongdai@126.com"
+        }
+    ],
+    "require": {
+        "cedaro/woocommerce-coupon-links": "^2.2",
+        "atelierdisko/coupon_code": "^1.0"
+    }
+}

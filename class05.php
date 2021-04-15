@@ -13,11 +13,11 @@ class Human{
     private $isHungry=true; // 只有自身可以访问到
 
     public function eat($food){
-        echo $this->name . "'s eating ". $food. "\n";
+        echo $this->name . "'s eating ". $food. "\n<BR \>";
     }
 
     public function info(){
-        print "HUMAN: " . $this->name . ";" . $this->height . ";" . $this->weight . ";" . $this->isHungry ."\n";
+        print "HUMAN: " . $this->name . ";" . $this->height . ";" . $this->weight . ";" . $this->isHungry ."\n<BR \>";
     }
 }
 
@@ -32,42 +32,42 @@ class NbaPlayer extends Human
 
     // 构造函数通常用于初始化对象的属性值
     function __construct($name, $height, $weight, $team, $playerNumber) {
-       print $name . ";" . $height . ";" . $weight . ";" . $team . ";" . $playerNumber."\n";
+       print $name . ";" . $height . ";" . $weight . ";" . $team . ";" . $playerNumber."\n<BR \>";
        $this->name = $name; // $this是php里面的伪变量，表示对象自身
        $this->height = $height; // 通过$this可以设置对象的属性值
        $this->weight = $weight;
        $this->team = $team;
        $this->playerNumber = $playerNumber;
-       echo $this->isHungry."\n";
+       echo $this->isHungry."\n<BR \>";
     }
     // 析构函数，用于清理程序中使用的系统资源，比如释放打开的文件等等
     // 析构函数在该对象不会再被使用的情况下自动调用
     function __destruct() {
-       print "Destroying " . $this->name . "\n";
+       print "Destroying " . $this->name . "\n<BR \>";
     }
 
     // 类的方法的定义
     public function run() {
-        echo "Running\n";
+        echo "Running\n<BR \>";
     }
 
     public function jump(){
-        echo "Jumping\n";
+        echo "Jumping\n<BR \>";
     }
     public function dribble(){
-        echo "Dribbling\n";
+        echo "Dribbling\n<BR \>";
     }
     public function shoot(){
-        echo "Shooting\n";
+        echo "Shooting\n<BR \>";
     }
     public function dunk(){
-        echo "Dunking\n";
+        echo "Dunking\n<BR \>";
     }
     public function pass(){
-        echo "Passing\n";
+        echo "Passing\n<BR \>";
     }
     public function getAge(){
-        echo $this->name . "'s age is " . ($this->age - 2) . "\n";
+        echo $this->name . "'s age is " . ($this->age - 2) . "\n<BR \>";
     }
 }
 
@@ -76,10 +76,23 @@ $jordan = new NbaPlayer("Jordan", "198cm", "98kg", "Bull", "23");
 $jordan->info();
 
 // step2，证明public的属性可以被其他类访问
-echo $jordan->getAge()."\n";
+echo $jordan->getAge()."\n<BR \>";
 
 // step3，证明private的属性只能被自身访问
 // 把这行代码添加到构造函数试试
-echo $this->isHungry."\n";
+echo $this->isHungry."\n<BR \>";
 
-?>
+
+
+/*
+Jordan;198cm;98kg;Bull;23
+
+Notice: Undefined property: NbaPlayer::$isHungry in /Users/Shared/Relocated Items/Security/data/www/PHP/class05.php on line 41
+
+HUMAN: Jordan;198cm;98kg;1
+Jordan's age is 38
+
+
+Fatal error: Uncaught Error: Using $this when not in object context in /Users/Shared/Relocated Items/Security/data/www/PHP/class05.php:83 Stack trace: #0 {main} thrown in /Users/Shared/Relocated Items/Security/data/www/PHP/class05.php on line 83
+
+*/

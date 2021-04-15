@@ -20,7 +20,7 @@ class NbaPlayer
 
     // 构造函数通常用于初始化对象的属性值
     function __construct($name, $height, $weight, $team, $playerNumber) {
-        print $name . ";" . $height . ";" . $weight . ";" . $team . ";" . $playerNumber."\n";
+        print $name . ";" . $height . ";" . $weight . ";" . $team . ";" . $playerNumber."\n"."<BR \>";
        $this->name = $name; // $this是php里面的伪变量，表示对象自身
        $this->height = $height; // 通过$this可以设置对象的属性值
        $this->weight = $weight;
@@ -31,28 +31,29 @@ class NbaPlayer
     // 析构函数，用于清理程序中使用的系统资源，比如释放打开的文件等等
     // 析构函数在该对象不会再被使用的情况下自动调用
     function __destruct() {
-       print "Destroying " . $this->name . "\n";
+       print "Destroying " . $this->name . "\n"."<BR \>";
+       //var_dump($this->name);
     }
 
     // 类的方法的定义
     public function run() {
-        echo "Running\n";
+        echo "Running\n"."<BR \>";
     }
 
     public function jump(){
-        echo "Jumping\n";
+        echo "Jumping\n"."<BR \>";
     }
     public function dribble(){
-        echo "Dribbling\n";
+        echo "Dribbling\n"."<BR \>";
     }
     public function shoot(){
-        echo "Shooting\n";
+        echo "Shooting\n"."<BR \>";
     }
     public function dunk(){
-        echo "Dunking\n";
+        echo "Dunking\n"."<BR \>";
     }
     public function pass(){
-        echo "Passing\n";
+        echo "Passing\n"."<BR \>";
     }
 }
 
@@ -62,17 +63,30 @@ class NbaPlayer
  */
 $jordan = new NbaPlayer("Jordan", "198cm", "98kg", "Bull", "23");
 // 访问对象的属性使用的语法是->符号，后面跟着属性的名称
-echo $jordan->name."\n";
+echo $jordan->name."\n"."<BR \>";
 // 调用对象的某个方法使用的语法是->符号，后面跟着方法的名称和一对括号
 $jordan->run();
 $jordan->pass();
 
 $james = new NbaPlayer("James", "203cm", "120kg", "Heat", "6");
-echo $james->name."\n";
+echo $james->name."\n"."<BR \>";
 // 当对象变量被赋值为Null的时候，对象的析构函数会被自动调用
 // 同一个类的其他对象不受影响
 $james = null; 
-echo "From now on James will not be used anymore.\n";
+echo "From now on James will not be used anymore.\n"."<BR \>";
 // 当程序执行结束时，所有类的对象的析构函数都会自动被调用
 
+
+
+/*
+Jordan;198cm;98kg;Bull;23
+Jordan
+Running
+Passing
+James;203cm;120kg;Heat;6
+James
+Destroying James
+From now on James will not be used anymore.
+Destroying Jordan 
+*/
 ?>

@@ -7,17 +7,17 @@ date_default_timezone_set("PRC");
  */
 class MagicTest{
   public function __tostring(){
-    return "This is the Class MagicTest.\n";
+    return "This is the Class MagicTest.\n<BR \>";
   }
   public function __invoke($x){
-    echo "__invoke called with parameter " . $x . "\n";
+    echo "__invoke called with parameter " . $x . "\n<BR \>";
   }
   public function __call($name, $arguments){
-    echo "Calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n";
+    echo "Calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n<BR \>";
   }
 
   public static function __callStatic($name, $arguments){
-    echo "Static calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n";
+    echo "Static calling " . $name . " with parameters: " . implode(', ', $arguments) . "\n<BR \>";
   }
 }
 
@@ -26,9 +26,9 @@ $obj->runTest("para1", "para2");
 MagicTest::runTest("para3","para4");
 
 
-?>
 
-
+/*
 rst:
 Calling runTest with parameters: para1, para2
 Static calling runTest with parameters: para3, para4
+*/

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
+<script type="text/javascript" >
+	
+	$(document).ready(function(){
+      
+
+      //console.log(Object.keys(coupon_products).length);
+      $.ajax({
+
+        //url: 'index.php?route=dfrobot/main&user_token={{ user_token }}&uri=/coupon_new/categoryProduct',
+        url: 'test.php',
+        
+        dataType: 'json',
+        beforeSend: function () {
+            console.log('beforeSend')
+        },
+        success: function(json) {
+             console.log(json)
+        },
+        complete: function () {
+            console.log('complete')
+        },
+        error: function (data) {
+            console.info("error");
+        }
+      }); 
+
+      
+      
+    });
+</script>
+</head>
+<body>
+<form >
+    <table>
+    <tr>
+        <td>1</td>
+        <td>23</td>
+    </tr>
+</table>
+</form>
+
+</body>
+
+
+
+
+
+
+</html>
+
+

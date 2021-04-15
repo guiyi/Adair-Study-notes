@@ -1,0 +1,49 @@
+{
+  "name": "cedaro/woocommerce-coupon-links",
+  "description": "A WordPress plugin to automatically apply a WooCommerce coupon code to the cart with a URL.",
+  "keywords": [ "wordpress" ],
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/cedaro/woocommerce-coupon-links",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Luke McDonald",
+      "homepage": "https://www.cedaro.com/"
+    },
+    {
+      "name": "Brady Vercher",
+      "email": "brady@blazersix.com",
+      "homepage": "https://www.cedaro.com/"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/cedaro/woocommerce-coupon-links/issues",
+    "source": "https://github.com/cedaro/woocommerce-coupon-links"
+  },
+  "require": {
+    "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*@stable",
+    "woocommerce/woocommerce": "*@stable"
+  },
+  "autoload-dev": {
+    "classmap": [
+      "vendor/woocommerce/woocommerce/tests/framework"
+    ],
+    "psr-4": {
+      "Cedaro\\WooCommerce\\CouponLinks\\Test\\": "tests/phpunit/"
+    }
+  },
+  "extra": {
+    "installer-paths": {
+      "vendor/woocommerce/{$name}": [ "woocommerce/woocommerce" ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/woothemes/woocommerce"
+    }
+  ]
+}
