@@ -4,14 +4,106 @@
 <title>001 属性 HTML代码/文本/值</title>
 <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
+//$(document).ready(function(){
+	//获取国家和地区JSON文件
+	var ajaxUrl = 'country.json';
+	$.ajax({
+		url: ajaxUrl,
+		type: 'get',
+		dataType: 'json',
+		beforeSend: function() {
+		},
+		complete: function() {
+		},
+		success: function(result) {
+			var _this =this;
+			if(result.code == 1){
+				//console.log(result.data.countries);
+				var select = '';
+				var select2 = '';
+				var select1 = '<table><tbody id="addMaterialTbody"><tr> <td width="50"><select  id="pid" name="locationid[]" ><option value="">select </option>';
 
-});
+				var some_function = function(result) { 
+					$.each(result.data.countries, function(i,item){
+					    //console.log(item.name);
+					    select2 +='<option value='+item.country_id+'>'+item.name+' </option>';
+					    //console.log(select2);
+					    
+					});
+					return select2;
+				};
+
+				/*$.each(result.data.countries, function(i,item){
+					//console.log(item.name);
+					select2 +='< option value='+item.country_id+'>'+item.name+' </option>';
+					//console.log(select2);
+					    
+				});*/
+				var select3 ='</select></td> </tr></tbody></table>';
+				
+
+				var aa = some_function(result);
+				//console.log(aa);
+				select = select1+select2+select3;	
+				//select.concat(select1,select2.select3);
+				//console.log(select);
+				$("p").html(select);
+
+				$("#pid").change(function(){
+				  	var opt = $("#pid").val();
+				   	console.log(opt)//每次选择都会输出选择的当前option的value
+				   	openCollectBox(opt);
+				  
+				});
+
+
+				
+			}else{
+				S_PATH.tips(result.message);
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			console.log('Ajax Error!' + ajaxUrl)
+		}
+	});
+
+//});
+var openCollectBox = function(opt){
+	var ajaxUrl = 'country.json';
+	$.ajax({
+		url: ajaxUrl,
+		type: 'get',
+		dataType: 'json',
+		beforeSend: function() {
+		},
+		complete: function(result) {
+
+		},
+		success: function(result) {
+
+			if(result.code == 1){
+				$.each(result.data.countries, function(i,item){
+					    if(item.country_id == opt ){
+					    	console.log(item.country_id+' -- '+item.name);
+					    }
+					   
+					    
+					});
+			}
+		},error: function(xhr, ajaxOptions, thrownError) {
+			console.log('Ajax Error!' + ajaxUrl)
+		}
+	});
+
+}
+
+
 </script>
 </head>
 
 <body>
-
+<p>
+</p>
 </body>
 
 </html>

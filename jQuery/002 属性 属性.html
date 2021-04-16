@@ -21,6 +21,7 @@ $(document).ready(function(){
 
 	//prop(name|properties|key,value|fn) 获取匹配的元素集中第一个元素的属性（property）值或设置每一个匹配元素的一个或多个属性。
 	$("input[type='checkbox']").prop("checked", true);
+	$("input[type='checkbox']").attr("checked", true);
 	$("input[type='radio']").prop("checked", false);
 	$("input[type='radio']").prop("checked", function( i, val ) {
 	  console.log(i,val) ;
@@ -38,7 +39,37 @@ $(document).ready(function(){
 	  console.log('item-' + $(this).index()) ;
 	  return 'item-' + $(this).index();
 	});
+
+
+	$("p").html('<table><tbody id="addMaterialTbody"><tr> <td width="50"><select name="locationid[]"><option value=24>Aaland Islands </option><option value="4">库位4</option></select></td> </tr></tbody></table>'); //设置所有 p 元素的内容
+
+
+			//获取国家和地区JSON文件
+			var ajaxUrl = 'country.json';
+			$.ajax({
+				url: ajaxUrl,
+				type: 'get',
+				dataType: 'json',
+				beforeSend: function() {
+				},
+				complete: function() {
+				},
+				success: function(result) {
+					if(result.code == 1){
+						console.log(result.data.countries);
+						//fun(result.data.countries);
+					}else{
+						S_PATH.tips(result.message);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					console.log('Ajax Error!' + ajaxUrl)
+				}
+			});
+		
 });
+
+
 </script>
 </head>
 
