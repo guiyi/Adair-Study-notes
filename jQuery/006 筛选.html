@@ -1,0 +1,257 @@
+<html>
+
+<head>
+<title>006 筛选</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	//eq(index|-index)获取第N个元素
+	var eq1 = $('p').eq(-2)
+ 	funfor(eq1,'eq1 : ');
+
+ 	var eq2 = $('p').eq(0)
+ 	funfor(eq2,'eq2 : ');
+
+ 	var eq3 = $('p').eq(1)
+ 	funfor(eq3,'eq3 : ');
+
+ 	var eq4 = $('p').eq(-1)
+ 	funfor(eq4,'eq4 : ');
+
+ 	//first() 获取第一个元素
+ 	var first = $('li').first();
+	funfor(first,'first : ');
+
+	//last() 获取最后一个元素
+ 	var last = $('li').last();
+	funfor(last,'last : ');
+
+
+	//hasClass(class) 检查当前的元素是否含有某个特定的类，如果有，则返回true。 这其实就是 is("." + class)。
+	$("div").click(function(){
+	  if ( $(this).hasClass("protected") )
+	  	console.log(111);
+	    $(this)
+	      .animate({ left: -10 })
+	      .animate({ left: 10 })
+	      .animate({ left: -10 })
+	      .animate({ left: 10 })
+	      .animate({ left: 0 });
+	});
+
+	console.log($("div").hasClass("protected"));
+
+	//filter(expr|obj|ele|fn) 筛选出与指定表达式匹配的元素集合。
+	var filter = $("p").filter(".selected")
+	funfor(filter,'filter :');
+
+	var filter1 = $("p").filter(".selected, :first")
+	funfor(filter1,'filter1 :');
+
+	var filter2 = $("p").filter(function(index) {
+	  return $("ol", this).length == 0;
+	});
+	funfor(filter2,'filter2 :');
+
+
+
+	//is(expr|obj|ele|fn) 根据选择器、DOM元素或 jQuery 对象来检测匹配元素集合，如果其中至少有一个元素符合这个给定的表达式就返回true。
+	var is = $('input[type="checkbox"]').parent().is("form")
+	console.log(is);
+
+	$("li").click(function(){
+		var $li = $(this),
+		isWithTwo = $li.is(function(){
+			return $('strong',this).length === 2;
+
+		});
+		if(isWithTwo){
+			$li.css("background-color","green");
+
+		}else{
+			$li.css("background-color","red");
+		}
+		
+	});
+
+	//map(callback) 将一组元素转换成其他数组（不论是否是元素数组）
+	$("p").append($("input").map(function(){
+		return $(this).val();
+	}).get().join("  ----  "));
+
+	//has(expr|ele) 保留包含特定后代的元素，去掉那些不含有指定后代的元素。
+	$('li').has('ul').css('background-color', 'red');
+
+	//not(expr|ele|fn) 删除与指定表达式匹配的元素
+	var not = $("p").not( $("#selected")[0] );
+	funfor(not,'not :');
+
+	//slice(start, [end])选取一个匹配的子集
+	$("p").slice(0, 1).wrapInner("<b></b>");
+	$("p").slice(-1).wrapInner("<b></b>");
+
+	//children([expr]) 取得一个包含匹配的元素集合中每一个元素的所有子元素的元素集合。
+	var children = $("div").children()
+	funfor(children,'children :');
+	var children1 = $("div").children(".selected")
+	funfor(children1,'children1 :');
+
+	//closest(expr|object|element) 从元素本身开始，逐级向上级元素匹配，并返回最先匹配的元素。。
+	var closest = $("li:first").closest(["ul", "body"]);
+	funfor(closest,'closest :');
+
+
+	$(document).bind("click", function (e) {
+	    $(e.target).closest("li").toggleClass("hilight");
+	});
+
+	//find(expr|obj|ele) 搜索所有与指定表达式匹配的元素。这个函数式找出正在处理的元素的后代元素的好方法。
+	var find = $("p").find("span");
+	funfor(find,"find : ");
+
+	//next([expr]) 取得一个包含匹配的元素集合中的每一个紧邻的后面同辈元素的元素集合
+	var next = $("p").next();
+	funfor(next,"next : ");
+
+	//nextAll([expr]) 查找当前元素之后所有的同辈元素。
+	$("div:first").nextAll().addClass("after");
+
+	//nextUntil([exp|ele][,fil]) 查找当前元素之后所有的同辈元素，直到遇到匹配的那个元素为止。
+	$('#term-2').nextUntil('dt').css('background-color', 'orange');
+	      
+	var term3 = document.getElementById("term-3");
+	$("#term-1").nextUntil(term3, "dd").css("color", "green");
+
+	//offsetParent() 返回第一个匹配元素用于定位的父节点。
+	$("button").click(function(){
+	    $("p").offsetParent().css("background-color","green");
+	});
+
+	//parent([expr]) 取得一个包含着所有匹配元素的唯一父元素的元素集合
+	var parent = $("p").parent();
+	funfor(parent,"parent : ");
+
+	//siblings([expr]) 取得一个包含匹配的元素集合中每一个元素的所有唯一同辈元素的元素集合。可以用可选的表达式进行筛选
+	var siblings = $("div").siblings();
+	funfor(siblings,"siblings : ");
+
+	var siblings1 = $("div").siblings(".selected");
+	funfor(siblings1,"siblings1 : ");
+
+	//add(expr|ele|html|obj[,con]) 把与表达式匹配的元素添加到jQuery对象中。这个函数可以用于连接分别与两个表达式匹配的元素结果集。
+
+	//contents() 查找匹配元素内部所有的子节点（包括文本节点）。如果元素是一个iframe，则查找文档内容
+	$("p").contents().not("[nodeType=1]").wrap("<b/>");
+
+	//for 循环
+	function funfor(arr,msg='' ){
+        for(var i=0 ; i<arr.length ;i++){
+			console.log(msg,arr[i]);
+		}
+    }
+
+});
+</script>
+<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	.protected{
+		width: 20px;
+		height: 30px;
+		border: 1px solid red;
+	}
+	.hilight{
+		background-color: yellow;
+	}
+</style>	
+
+</head>
+
+<body>
+	<p> This is just a test.</p> <p> So is this</p>
+	<ul>
+	    <li>list item 1</li>
+	    <li>list item 2</li>
+	    <li>list item 3</li>
+	    <li>list item 4</li>
+	    <li>list item 5</li>
+	</ul>
+
+	<div class="protected"></div><div></div>
+
+	<p>Hello</p><p>Hello Again</p><p class="selected">And Again</p>
+
+	<p><ol><li>Hello</li></ol></p><p>How are you?</p>
+
+	<form><input type="checkbox" /></form>
+
+	<ul>
+	  <li><strong>list</strong> item 1 - one strong tag</li>
+	  <li><strong>list</strong> item <strong>2</strong> - two <span>strong tags</span></li>
+	  <li>list item 3</li>
+	</ul>
+
+	<p><b>Values: </b></p>
+	<form>
+	  <input type="text" name="name" value="John"/>
+	  <input type="text" name="password" value="password"/>
+	  <input type="text" name="url" value="http://ejohn.org/"/>
+	</form>
+
+	<ul>
+	  <li>list item 1</li>
+	  <li>list item 2
+	    <ul>
+	      <li>list item 2-a</li>
+	      <li>list item 2-b</li>
+	    </ul>
+	  </li>
+	  <li>list item 3</li>
+	  <li>list item 4</li>
+	</ul>
+
+	<p>Hello</p><p id="selected">Hello Again</p>
+
+	<p>Hello</p><div><span>Hello Again</span></div><p>And Again</p>
+	<div><span>Hello</span><p class="selected">Hello Again</p><p>And Again</p></div>
+
+	<ul>
+	    <li><b>Click me!</b></li>
+	    <li>You can also <b>Click me!</b></li>
+	</ul>
+
+	<p><span>Hello</span>, how are you?</p>
+
+	<div></div><div></div><div></div><div></div>
+
+	<dl>
+	  <dt>term 1</dt>
+	  <dd>definition 1-a</dd>
+	  <dd>definition 1-b</dd>
+	  <dd>definition 1-c</dd>
+	  <dd>definition 1-d</dd>
+
+	  <dt id="term-2">term 2</dt>
+	  <dd>definition 2-a</dd>
+	  <dd>definition 2-b</dd>
+	  <dd>definition 2-c</dd>
+
+	  <dt>term 3</dt>
+	  <dd>definition 3-a</dd>
+	  <dd>definition 3-b</dd>
+	</dl>
+
+	<div style="width:70%;position:absolute;left:100px;top:100px">
+	  <div style="margin:50px;background-color:yellow">
+	     <p>点击下面的按钮可以设置本段落的最近的父（祖先）元素的背景色。</p>
+	   <div>
+	</div>
+	<button>点击这里</button>
+
+	<p>Hello <a href="http://ejohn.org/">John</a>, how are you doing?</p>
+</body>
+
+</html>

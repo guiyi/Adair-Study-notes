@@ -1,0 +1,172 @@
+<html>
+
+<head>
+<title>010 工具</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//each(object, [callback]) 通用遍历方法，可用于遍历对象和数组
+	//不同的遍历jQuery对象的$().each()方法，此方法用于遍历任何对象。回调函数拥有两个参数：第一个为对象的成员或数组的索引，第二个为对应变量或内容。如果需要推出each循环可使用回调函数返回false，其他返回值被忽略。
+	$.each([4,5,6],function(i,n){
+		console.log("Item #"+i+": "+n);
+	});
+
+	$.each( { name: "John", lang: "JS" }, function(i, n){
+	  console.log( "Name: " + i + ", Value: " + n );
+	});
+
+	//extend([deep], target, object1, [objectN]) 用一个或多个其他对象来扩展一个对象，返回被扩展的对象。
+	//如果不指定target，则给jQuery命名空间本身进行扩展。这有助于插件作者为jQuery增加新方法。如果第一给参数设置为true，则jQuery返回一个深层次的副本，递归地复制找到的任何对象。否则的话，副本会与原对象共享结构。为定义的属性将不会被复制，然而从对象的原型继承的属性将会被复制。
+
+	var settings = { validate: false, limit: 5, name: "foo" };
+	var options = { validate: true, name: "bar" };
+	var news = jQuery.extend(options, settings);
+	console.log(news);
+
+
+	var empty = {};
+	var defaults = { validate: false, limit: 5, name: "foo" };
+	var options = { validate: true, name: "bar" };
+	var settings = jQuery.extend(empty, defaults, options);
+	console.log(settings);
+
+	//grep(array, callback, [invert]) 使用过滤函数过滤数组元素. 
+	//此函数至少传递两个参数：待过滤数组和过滤函数。过滤函数必须返回true 以保留元素或 false以删除元素。
+	//过滤数组中小于 0 的元素。
+	var grep = $.grep( [0,1,2], function(n,i){
+	  return n > 0;
+	});
+	console.log(grep);
+
+	//排除数组中大于 0 的元素，使用第三个参数进行排除。
+	var grep1 = $.grep( [0,1,2], function(n,i){
+	  return n > 0;
+	}, true);
+	console.log(grep1);
+
+	//when(deferreds) 提供一种方法来执行一个或多个对象的回调函数，延迟对象通常表示异步事件。
+	//如果单一延迟传递给jQuery.when,它是通过这个方法或延迟对象附加其他方法可访问绑定的回调函数返回的。如defered.then。当延迟得到解决或者拒绝，通常的代码创建了原来的延迟，适当的回调将被调用。例如，jqXHR对象返回jQuery.ajax时一个延期，可以用这种方式：
+
+	/*$.when( $.ajax("country.json") ).then(function(ajaxArgs){ 
+	    alert(ajaxArgs[1]); // ajaxArgs is [ "success", statusText, jqXHR ] 
+	});*/
+
+	$.when( { testing: 123 } ).done(
+	   function(x){ 
+	   	console.log("when : "+x.testing); 
+	   } /* alerts "123" */
+	);
+
+	//makeArray(obj) 将类数组对象转换为数组对象。
+	//类数组对象有 length 属性，其成员索引为 0 至 length - 1。实际中此函数在 jQuery 中将自动使用而无需特意转换。
+	var arr = jQuery.makeArray(document.getElementsByTagName("div"));
+	arr.reverse(); // 使用数组翻转函数
+	funfor(arr,"makeArray : ");
+
+	//map(arr|obj,callback) 将一个数组中的元素转换到另一个数组中。
+	//作为参数的转换函数会为每个数组元素调用，而且会给这个函数传递一个表示被转换的元素作为参数。转换函数可以返回转换后的值、null（删除数组中的项目）或一个包含值的数组，并扩展至原始数组中。
+
+	//将原数组中每个元素加 4 转换为一个新数组。
+	var map = $.map( [0,1,2], function(n){
+	  return n + 4;
+	});
+	console.log(map);
+
+	//原数组中大于 0 的元素加 1 ，否则删除。
+	var map1 = $.map( [0,1,2], function(n){
+	  return n > 0 ? n + 1 : null;
+	});
+	console.log(map1);
+
+	//inArray(value,array,[fromIndex]) 确定第一个参数在数组中的位置，从0开始计数(如果没有找到则返回 -1 )。
+	var arr = [ 4, "Pete", 8, "John" ];
+	var inArray1 = jQuery.inArray("John", arr);  //3
+	var inArray2 = jQuery.inArray(4, arr);  //0
+	var inArray3 = jQuery.inArray("David", arr);  //-1
+	var inArray4 = jQuery.inArray("Pete", arr, 2);  //-1
+ 	console.log("inArray1 : "+inArray1);
+ 	console.log("inArray2 : "+inArray2);
+ 	console.log("inArray3 : "+inArray3);
+ 	console.log("inArray4 : "+inArray4);
+
+ 	//toArray() 把jQuery集合中所有DOM元素恢复成一个数组。
+ 	//得到所有li的元素数组
+ 	var toArray = $('li').toArray();
+ 	funfor(toArray,"toArray : ");
+ 	console.log(toArray);
+
+
+ 	//merge(first,second) 合并两个数组
+ 	//返回的结果会修改第一个数组的内容——第一个数组的元素后面跟着第二个数组的元素。要去除重复项，请使用$.unique()
+ 	//合并两个数组到第一个数组上。
+ 	var merge = $.merge( [0,1,2], [2,3,4] );
+ 	//funfor(merge,"merge : ");
+ 	console.log(merge);
+
+ 	//删除数组中重复元素。只处理删除DOM元素数组，而不能处理字符串或者数字数组。
+ 	var unique = $.unique( merge );
+ 	console.log(unique);
+
+ 	//parseJSON(json)接受一个JSON字符串，返回解析后的对象。
+ 	var obj = jQuery.parseJSON('{"name":"John"}');
+ 	console.log( obj.name === "John" );
+
+
+ 	var xml = '<rss version="2.0"><channel><title>RSS Title</title></channel></rss>',
+      xmlDoc = $.parseXML( xml ),
+      $xml = $( xmlDoc ),
+      $title = $xml.find( 'title' );	        // append "RSS Title" to #someElement
+	  $( '#someElement' ).append( $title.text() );	    // change the title to "XML Title"
+	  $title.text( 'XML Title' );    // append "XML Title" to #anotherElement
+	  $( '#anotherElement' ).append( $title.text() );
+	 console.log( xml);
+
+
+	var obj = {
+	  name: "John",
+	  test: function() {
+	    alert( this.name );
+	    $("#test").unbind("click", obj.test);
+	  }
+	};
+
+	$("#test").click( jQuery.proxy( obj, "test" ) );
+
+	// 以下代码跟上面那句是等价的:
+	// $("#test").click( jQuery.proxy( obj.test, obj ) );
+
+	// 可以与单独执行下面这句做个比较。
+	// $("#test").click( obj.test );
+
+	//contains(container,contained) 一个DOM节点是否包含另一个DOM节点。
+	var contains1 = jQuery.contains(document.documentElement, document.body); // true
+	console.log("contains1 : " + contains1);
+	var contains2 = jQuery.contains(document.body, document.documentElement); // false
+	console.log("contains2 : " + contains2);
+
+
+	//for 循环
+	function funfor(arr,msg='' ){
+        for(var i=0 ; i<arr.length ;i++){
+			console.log(msg,arr[i]);
+		}
+    }
+});
+</script>
+	
+
+</head>
+
+<body>
+	<div>First</div><div>Second</div><div>Third</div><div>Fourth</div>
+
+	<ul>
+		<li>foo</li>
+		<li>bar</li>
+		<li>see</li>
+	</ul>
+
+	<div id="test">Click Here!</div>
+</body>
+
+</html>

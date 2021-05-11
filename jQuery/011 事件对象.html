@@ -1,0 +1,190 @@
+<html>
+
+<head>
+<title>011 事件对象</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//event.currentTarget 在事件冒泡阶段中的当前DOM元素
+	//警报currentTarget的匹配`this`关键字。
+	$("p").click(function(event) {
+	    console.log( event.currentTarget === this ); // true  
+	});  
+
+	//event.data 当前执行的处理器被绑定的时候，包含可选的数据传递给jQuery.fn.bind
+	$("a").each(function(i) {
+	    $(this).bind('click', {index:i}, function(e){
+	       console.log('my index is ' + e.data.index);
+	    });
+	});
+
+	//event.delegateTarget 当currently-called的jQuery事件处理程序附加元素。
+	$(".box").on("click", "button", function(event) {
+	  $(event.delegateTarget).css("background-color", "red");
+	}); 
+
+	//event.isDefaultPrevented() 根据事件对象中是否调用过 event.preventDefault() 方法来返回一个布尔值。
+	//检测 event.preventDefault() 是否被调用过。
+	$("a").click(function(event){
+	    console.log( event.isDefaultPrevented() ); // false
+	    event.preventDefault();
+	    console.log( event.isDefaultPrevented() ); // true
+	}); 
+
+	//event.isImmediatePropagationStopped() 根据事件对象中是否调用过 event.stopImmediatePropagation() 方法来返回一个布尔值。
+	//检测 event.stopImmediatePropagation() 是否被调用过。
+	/*function immediatePropStopped(e) {
+	    var msg = "";
+	    if ( e.isImmediatePropagationStopped() ) {
+	      msg =  "called";
+	    } else {
+	      msg = "not called";
+	    }
+	    $("#stop-log").append( "<div>" + msg + "</div>" );
+	}
+	$("button").click(function(event) {
+	    immediatePropStopped(event);
+	    event.stopImmediatePropagation();
+	    immediatePropStopped(event);
+	});
+
+	//event.isPropagationStopped() 根据事件对象中是否调用过 event.stopPropagation() 方法来返回一个布尔值
+	//检测 event.stopPropagation() 是否被调用过。
+	function propStopped(e) {
+	    var msg = "";
+	    if ( e.isPropagationStopped() ) {
+	      msg =  "called";
+	    } else {
+	      msg = "not called";
+	    }
+	    $("#stop-log").append( "<div>" + msg + "</div>" );
+	}
+	$("button").click(function(event) {
+	    propStopped(event);
+	    event.stopPropagation();
+	    propStopped(event);
+	});*/
+
+	//event.namespace 当事件被触发时此属性包含指定的命名空间。
+	$("p").bind("test.something", function(event) {
+	    console.log( event.namespace );  
+	});
+	$("button").click(function(event) {
+	    $("p").trigger("test.something");
+	});
+
+	//event.pageX 鼠标相对于文档的左边缘的位置。
+	$(document).bind('mousemove',function(e){
+       $("#log").text("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
+    });
+
+	//event.preventDefault()  阻止默认事件行为的触发。
+    $("a").click(function(event) {
+       event.preventDefault();
+       $('<div/>').append('default ' + event.type + ' prevented').appendTo('#log');
+    });
+
+
+    //event.relatedTarget 在事件中涉及的其它任何DOM元素。
+    $("a").mouseout(function(event) {
+	    console.log(event.relatedTarget.nodeName); // "DIV"
+	});  
+
+	//event.result 这个属性包含了当前事件事件最后触发的那个处理函数的返回值，除非值是 undefined 。
+	$("button").click(function(event) {    
+		return "hey"; 
+	});
+
+    $("button").click(function(event) {
+        $("p").html( event.result +' 123');
+    });
+
+
+    //event.target 最初触发事件的DOM元素。
+    //举例： 实现一个简单的事件委托：给无序列表增加一个点击事件处理函数，然后它的子元素li的子元素都隐藏起来。当点击这个ul其中一个子元素li的时候，来回切换显示（参见 toggle()）li的子元素。
+    function handler(event) {
+	    var $target = $(event.target);
+	    console.log($target);
+	    if( $target.is("li") ) {
+	      $target.children().toggle();
+	    }
+	}
+  	$("ul").click(handler).find("ul").hide();
+
+  	//event.timeStamp 这个属性返回事件触发时距离1970年1月1日的毫秒数。
+  	//显示两次点击之间的时间。
+  	var last, diff;  $('div').click(function(event) {
+	    if ( last ) {
+	      diff = event.timeStamp - last;
+	      $('div').append('time since last event: ' + diff + '<br/>');
+	    } else {
+	      $('div').append('Click again.<br/>');
+	    }
+	    last = event.timeStamp;
+	});
+
+  	//点击所有锚点后弹出事件类型。
+	$("a").click(function(event) {
+	    console.log(event.type); // "click"
+	}); 
+
+
+	//event.which 针对键盘和鼠标事件，这个属性能确定你到底按的是哪个键或按钮。
+	//记录按键。
+	$('#whichkey').bind('keydown',function(e){
+    $('#whichkey_log').html(e.type + ': ' +  e.which );  });
+	
+
+});
+</script>
+	
+<style>
+         div { height: 100px; width: 300px; margin: 10px;
+         background-color: #ffd; overflow: auto; }
+</style>
+</head>
+
+<body>
+	<p>aaaa</p>
+	<a href="#">www.bai.com</a>
+	<div class="box">
+		<p>点击按钮修改这个 div 元素的背景颜色。</p>
+		<button>点我!</button>
+	</div>
+
+	<button>click me</button>
+    <div id="stop-log"></div>
+
+    <button>display event.namespace</button>
+  	<p>123</p>
+
+
+  	<a href="http://jquery.com">default click action is prevented</a>
+    <div id="log">666</div>
+
+    <button>display event.result</button>
+    <p></p>
+
+    <ul>
+	    <li>item 1
+	      <ul>
+	        <li>sub item 1-a</li>
+	        <li>sub item 1-b</li>
+	      </ul>
+	    </li>
+	    <li>item 2
+	      <ul>
+	        <li>sub item 2-a</li>
+	        <li>sub item 2-b</li>
+	      </ul> 
+	    </li>
+  	</ul>
+	   
+     <div></div>
+
+    <input id="whichkey" value="type something">
+    <div id="whichkey_log"></div>
+
+</body>
+
+</html>

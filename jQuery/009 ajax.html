@@ -1,0 +1,118 @@
+<html>
+
+<head>
+<title>009 ajax</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//ajax(url,[settings]) 通过HTTP请求加载远程数据
+	//jQuery底层AJAX实现。简单易用的高层实现见$.get,$.post等。$.ajax() 返回其创建的XMLHttpRequest对象。大多数情况下你无需直接操作该函数，除非你需要操作不常用的选项，以获得更多的灵活性。
+	//最简单的情况下，$.ajax()可以不带任何参数直接使用。
+	//注意，所有的选项都可以通过$.ajaxSetup()函数来全局设置。
+
+	//##  回调函数
+	//如果要处理$.ajax()得到的数据，则需要使用回调函数，beforeSend、error、dataFilter、success、complete.
+	//1.beforeSend 在发送请求之前调用，并且传入一个XMLHttpRequest作为参数。
+	//2.error 在调用出错是调用，传入XMLHttpRequest对象，描述错误类型的字符串以及一个异常对象（如果有的话）。
+	//3.dataFilter 在请求成功之后调用，传入返回的数据以及“dataType”参数的值。并且必须返回新的数据（可能是处理过的）传送success回调函数。
+	//4.success 当请求之后调用。传入返回后的数据，以及包含成功代码的字符串。
+	//5.complete 当请求完成之后调用这个函数，无论成功或失败。传入XMLHttpRequest对象，以及一个包含成功或失败的字符串。
+
+	//##  数据类型
+	//$.ajax()函数依赖服务器提供的信息来处理返回的数据。如果服务器报告说返回的数据是XML，那么返回的结果就可以用普通的XML方法或者jQuery的选择器来遍历。如果见得到其他类型，比如HTML，则数据就以文本形式来对待。
+	//通过dateType选项还可以指定其他不同数据处理方式。除了单纯的XML,还可以指定html、json、jsonp、script或者text。
+	//其中，text和xml类型返回的数据不会经过处理，数据仅仅简单的将XMLHttpRequest的respenseText或respenseHTML属性传递给success回调函数，
+	//“注意”，我们必须确保网页服务器报告的MIME类型与我们选择的dataType所匹配。比如说，XML的话，服务器端就必须声明text/xml或者application/xml来获得一致性的结果。
+	//如果指定为html类型，任何内嵌的JavaScript都会在HTML作为一个字符串返回之前执行。类似的，指定script类型的话，也会先执行服务器端生成JavaScript，然后再把脚本作为一个文本数据返回。
+	//如果指定为json类型，则会把获取到的数据作为一个JavaScript对象来解析，并且把构建号的对象作为结果返回。为了实现这个目的，他首先尝试使用JSON.parse()。如果浏览器不支持，则使用一个函数来构建。JSON数据是一种能很方便通过JavaScript解析的结构化数据。如果获取的数据文件存放在远程服务器上（域名不同，也就是跨域获取数据），则需要使用jsonp类型，使用这种类型的话，会创建一个查询字符串参数 callback=？，这个参数会加在请求的URL后面。服务器端应当在JSON数据前加上回调函数，以便完成一个有效的JSONP请求。如果要指定回调函数的参数名来取代默认的callback，可以通过设置$.ajax()的jsonp参数。
+
+	//##  发送数据到服务器
+	//默认情况下，Ajax请求使用GET方法，如果要使用POST方法，可以设定type参数值。这个选项也会影响data选项中的内容如何发送到服务器。
+	//date选项既可以包含一个查询字符串，比如key1=value1&key2=value2，也可以是一个映射，比如{key1:'value1',key2:'value2'}.如果使用了后者的形式，则数据再发送器会转换成查询字符串。这个处理过程也可以通过设置processData选项为false来回避。如果我们希望发送一个UML对象给服务器时，这种处理可能并不合适。并且在这种情况下，我们也应当改变contentType选项的值，用其他合适的MIME类型来取代默认的application/x-www-form-urlencoded.
+
+	//##  高级选项
+	//global选项用于阻止响应注册的回调函数，比如.ajaxSend,或者ajaxError，以及类似的方法。这在有些时候很有用。比如发送的请求非常频繁且简短的时候，就可以在ajaxSend里禁用这个。
+	//如果服务器需要HTTP认证，可以使用用户名和密码 username 和 password 选项来设置。
+	//Ajax请求是限时的，所以错误警告被捕获并处理后，可以用来提升用户体验。请求超时这个参数通常就保留其默认值，要不就通过jQuery.ajaxSetup来全局设定，很少为特定的请求重新设置timeout选项。
+	//默认情况下，请求总会被发出去，但浏览器有可能从他的缓存在调取数据。要禁止使用缓存的结果，可以设置cache参数为false。当脚本和也门字符集不同时，这特别好用。
+	//Ajax的第一额字母是asynchronous的开头字母，这意味着所有的操作都是并行的，完成的顺序没有前后关系，$.ajax()的async参数总是设置成true，这标志着在请求开始后，其他代码依然能够执行。强烈不建议把这个选择设置为false，这意味着所有的请求都不再是异步了，这也会导致浏览器被锁死。
+	//$.ajax函数返回他创建的XMLHttpRequest对象。通常jQuery只在内部处理并创建这个对象，但用户可以通过xhr选项来传递一个自己创建的xhr对象。返回的对象通常已经被丢弃了，但依然提供一个底层接口来观察和操控请求。比如说，调用对象上.abort()可以在请求完成前挂起请求。
+
+
+
+
+	//load(url, [data], [callback]) 载入远程HTML文件代码并插入至DOM中。
+	//默认使用GET方式，传递附加参数时自动转换为POST方式。
+
+
+	//jQuery.get(url, [data], [callback], [type]) 通过远程HTTP GET请求载入信息。
+	//这是一个简单的GET请求功能以取代负责$.ajax.请求成功是可调用回调函数。如果需要在出错时执行函数。请使用$.ajax。
+	$.get(
+		"test.php",
+	 	{ name: "John", time: "2pm" },
+	 	function(data){
+    		alert("Data Loaded: " + data);
+  		}
+  	);
+
+	//jQuery.getJSON(url, [data], [callback]) 通过 HTTP GET 请求载入 JSON 数据。
+  	$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?", function(data){
+	  $.each(data.items, function(i,item){
+	    $("<img/>").attr("src", item.media.m).appendTo("#images");
+	    if ( i == 3 ) return false;
+	  });
+	});
+
+  	//jQuery.post(url, [data], [callback], [type]) 通过远程 HTTP POST 请求载入信息。
+	//获得 test.php 页面返回的 json 格式的内容
+	$.post(
+		"test.php", 
+		{ "func": "getNameAndTime" },
+	   function(data){
+	     alert(data.name); // John
+	     console.log(data.time); //  2pm
+	   }, 
+	   "json"
+	);
+
+
+	//serialize() 序列表表格内容为字符串。
+	$("#results").append( "serialize : <tt>" + $("form").serialize() + "</tt>" );
+	$("#results").append( "<br></br>serializeArray : " );
+
+	//serializeArray() 序列化表格元素 (类似 '.serialize()' 方法) 返回 JSON 数据结构数据。
+	var fields = $("select, :radio").serializeArray();
+
+	jQuery.each( fields, function(i, field){
+	  $("#results").append(  field.value + " ");
+	});
+
+
+});
+</script>
+	
+
+</head>
+
+<body>
+<div id="images"></div>
+
+<p id="results"><b>Results: </b> </p>
+<form>
+  <select name="single">
+    <option>Single</option>
+    <option>Single2</option>
+  </select>
+  <select name="multiple" multiple="multiple">
+    <option selected="selected">Multiple</option>
+    <option>Multiple2</option>
+    <option selected="selected">Multiple3</option>
+  </select><br/>
+  <input type="checkbox" name="check" value="check1"/> check1
+  <input type="checkbox" name="check" value="check2" checked="checked"/> check2
+  <input type="radio" name="radio" value="radio1" checked="checked"/> radio1
+  <input type="radio" name="radio" value="radio2"/> radio2
+</form>
+</body>
+
+</html>

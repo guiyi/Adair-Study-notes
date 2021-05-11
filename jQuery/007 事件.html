@@ -1,0 +1,272 @@
+<html>
+
+<head>
+<title>007 事件</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+//ready(fn) 当DOM载入就绪可以查询及操作时绑定一个要执行的函数
+//这是事件模块中最重要的一个函数，因为它可以极大的提高web应用程序的响应速度。
+//简单的说，这个方法纯粹是对window.load事件注册的替代方法。通过这个方法，可以在DOM载入就绪能够读取并操纵时立即调用你所绑定的函数，而99.99%的JavaScript函数都需要在那一刻执行。
+//有一个参数--对jQuery函数的引用--会传递到这个ready事件处理函数中。可以给这个参数任意起一个名字，并因此可以不再担心命名冲突而放心地使用$别名。
+//请确保在<body>元素到onload事件中没有注册函数，否则不会触发+$(document).ready()事件。
+//可以在同一个页面中无限次的使用$(document).ready()事件。其中注册的函数会按照(代码中的)先后顺序依次执行。
+$(document).ready(function(){
+
+});
+//使用 $(document).ready() 的简写，同时内部的 jQuery 代码依然使用 $ 作为别名，而不管全局的 $ 为何。
+$(function($t){
+	// 你可以在这里继续使用$作为别名...
+	//on(events,[selector],[data],fn) 在选择元素中绑定一个或多个事件的事件处理函数。
+	//on()方法绑定事件处理程序到当前选定的jQuery对象中的元素。在JQuery1.7中，on()方法提供绑定事件处理程序所需的所有功能。帮组从旧的jQuery事件方法转换，eg  .bind()、.delegate()、.live()要删除的.on()绑定的事件，请参阅.off().
+	//要附加一个事件，只运行一次，然后删除自己，请参阅.one()
+	$("p").on("click", function(){
+		alert( $(this).text() );
+	});
+
+
+	function myHandler(event) {
+		alert(event.data.foo);
+	}
+	$("p").on("click", {foo: "bar"}, myHandler)
+	//$("body").off("click", "p", foo); 
+
+	
+
+	//off(events,[selector],[fn]) 在选择元素上移除一个或多个事件处理函数。
+	//off()方法移除用.on()绑定的事件处理程序。有关详细信息，请参阅网页上的delegated和directly绑定事件。特定的事件处理程序可以移除元素上提供的名称，命名空间，选择器，或处理函数名称的组合。当有多个过滤参数，所提供的参数都必须匹配的事件处理程序被删除。
+	//如果一个简单的事件名称，比如提供“click”，所有这种类型的事件(包括直接和委派)从jQuery设置的元素上删除。当编写代码，将作为一个插件使用，或者干脆当一个大的代码基础工作，最好的做法是安装和取下使用命名空间的事件，从而使代码不会无意中删除其他代码附加事件处理程序。在一个特定的命名空间中的所有类型的所有事件，可以从一个元素中删除，只是提供了一个命名空间，比如“.myPlugin”。至少，无论是命名空间或事件名称必须提供。
+	//要删除特定的委派事件处理程序，提供一个seletor的参数。选择器字符串必须是完全匹配传递到.on()事件处理程序附加的选择器。要删除非委托元素上的所有事件，使用特需值“**”。
+	//处理程序也可以删除handler参数指定名称的函数。当jQuery的绑定一个事件处理程序，它分配一个唯一的ID给处理函数。函数用jQuery.proxy()代理或类似有相同的唯一ID机制(代理函数)，因此，通过代理处理程序.off可能会删除比预期更多的处理程序。在这种情况下，最好是附加和移除事件处理程序，使用命名空间。
+	//和.on()一样，你可以传递一个events->map 参数明确的指定而不是用events 和 handler 作为单独参数。健事件 和/或 命名空间；值是处理函数或为false的特色价值。
+
+	//$("p").off( "click", "**" )
+
+	//bind(type,[data],fn) 为每个匹配元素的特定事件绑定事件处理函数。
+	$("p").bind("click",function(){
+		console.log(1111);
+		alert($(this).text());
+	});
+
+	$("p").bind("click",function(){
+	    alert("这个段落被点击了。");
+	});
+
+	$("button").bind({
+	  click:function(){$("p").slideToggle();},
+	  mouseover:function(){$("body").css("background-color","red");},  
+	  mouseout:function(){$("body").css("background-color","#FFFFFF");}  
+	});
+
+	//one(type,[data],fn) 为每一个匹配元素的特定事件（像click）绑定一个一次性的事件处理函数。
+	//在每个对象上，这个事件处理函数只会被执行一次。其他规则与bind()函数相同。这个事件处理函数会接收到一个事件对象，可以通过它来阻止（浏览器）默认的行为。如果既想取消默认的行为，邮箱阻止事件起泡，这个处理函数必须返回false。
+	//多数情况下，可以把事件处理函数定义为匿名函数。在不可能定义匿名函数的情况下，可以传递一个可选的数据对象作为第二个参数(而事件处理函数则作为第三个参数)
+	$("p").one("click", function(){
+	  alert( $(this).text('456') );
+	});
+
+	//trigger(type,[data]) 在每一个匹配的元素上触发某类事件。
+	//这个函数也会导致浏览器同名的默认的执行。比如，如果用trigger()触发一个‘submit’，则同样会导致浏览器提交表单。如果要阻止这种默认行为，应返回false。
+	//你也可以触发有bind()注册的自定义事件而不限于浏览器默认事件。
+	//事件处理函数会收到一个修复的(规范化的)事件对象，但这个对象没有特定浏览器才有的属性，比如keyCode.
+	//jQuery也支持<a href="http://docs.jquery.com/Namespaced_Events">命名空间事件</a>这允许你触发或者解除绑定一组特定的事件处理函数，而无需一一指定。你可以在事件类型后面加上感叹号！来只触发那些没有命名空间的事件处理函数。
+
+	$("input").select(function(){
+	    $("input").after("文本已选中!");
+	});
+	$("button").click(function(){
+	    $("input").trigger("select");
+	});
+
+
+	$("#old").click(function(){
+	  $("input").trigger("focus");
+	});
+	$("#new").click(function(){
+	  $("input").triggerHandler("focus");
+	});
+	$("input").focus(function(){
+	  $("<span>Focused!</span>").appendTo("body").fadeOut(1000);
+	});
+ 
+	//unbind(type,[data|fn]])  bind()的反向操作，从每一个匹配的元素中删除绑定的事件。
+	//如果没有参数，则删除所有绑定的事件。
+	//你可以将你用bind()注册自定义事件取消绑定。
+	//如果提供了事件类型作为参数，则只删除该类型的绑定事件。
+	//如果把在绑定时传递的处理函数作为第二个参数，则只有这个特定的事件处理函数会被删除。
+	$("button").unbind()
+	$("p").unbind( "click" )
+
+	//delegate(selector,[type],[data],fn) 指定的元素(属于被选元素的子元素)添加一个或多个事件处理程序，并规定当这些事件发生时运行的函数。
+	//使用delegate()方法的事件处理程序适用于当前或未来的元素(比如由脚本创建的新元素)。
+	$("div").delegate("button","click",function(){
+	  $("p").slideToggle();
+	});
+
+	//删除由 delegate() 方法添加的一个或多个事件处理程序。
+	//$("div").undelegate("click")
+
+	//hover([over,]out) 一个模仿悬停事件(鼠标移动到一个对象上面及移除这个对象)的方法。这是一个自定义的方法，它为频繁使用的任务提供了一种“保持在其中”的状态。
+	//当鼠标移动到一个匹配的元素上面时，会触发指定的第一个函数。当鼠标移出这个元素时，会触发指定的第二个函数。而且会伴随着鼠标是否仍然处在特定元素中的检测（例如，处在div中的图像）。如果是，则会继续保持“悬停”状态，而不触发移除事件(修正了使用mouseout事件的一个常见错误)。
+	$("p").hover(function(){
+	    $("p").css("background-color","yellow");
+	    },function(){
+	    $("p").css("background-color","pink");
+	});
+
+	//blur([[data],fn]) 当元素失去焦点时触发blur事件。
+	//这个函数会调用执行并定的blur事件。
+	//这个函数会执行绑定到blur事件的所有函数，包括浏览器的默认行为。可以通过返回false来防止浏览器触发的默认行为。blur事件会在元素失去焦点的时候触发，既可以是鼠标行为，也可以是按tab健离开的
+	//$("input").blur( function () { alert("Hello World!"); } );
+
+	//change([[data],fn]) 当元素的值发生改变时，会发生change事件。
+	//该事件仅适用于文本域(text field),以及textarea和select元素。当用于select元素时，change事件会在选择某个选项时发生。当用于text field 或textarea 时，该事件会在元素上失去焦点时发生。
+	$("input[type='text']").change( function() {
+	  // 这里可以写些验证代码
+	  console.log(123);
+	});
+
+	$("input[type='checkbox']").change( function() {
+	  // 这里可以写些验证代码
+	  console.log(666);
+	});
+
+	//click([[data],fn]) 触发每一个匹配元素的click事件。
+	//这个函数会调用执行绑定click事件的所有函数。
+	$("p").click( function () { $(this).hide(); });
+	$("p").dblclick( function () { alert("Hello World!"); });
+
+	//error([[data],fn]) 当元素遇到错误(没有正确载入)时，发生error事件。
+	//这个函数会调用所绑定到error事件上的函数，包括对应元素上的浏览器默认行为。可以通过在某个绑定的函数中返回false来防止触发浏览器的默认行为。error事件通常可以在元素由于点击或者tab导航失去焦点时触发。
+	//对于error事件，没有一个公众的标准。在大多数浏览器中，当页面的JavaScript发生错误时，window对象会触发error事件；
+	//当图像src属性无效时，比如文件不存在或者图像数据错误时，也会触发图像对象的error事件。
+	//如果异常使用widonw对象抛出，事件处理函数将会被传入三个参数：
+	//1.描述事件信息(“varName is not defined”,"missing operator in expression",等等)，
+	//2.包含错误文档的完整URL
+	//3.异常发生的行数，如果事件处理函数返回true，则表示事件已经被处理，浏览器将认为没有异常。
+	$("img").error(function(){
+	    $("img").replaceWith("<p>图片加载错误!</p>");
+	});
+	$("button").click(function(){
+	    $("img").error();
+	});
+
+	//focus([[data],fn]) 当元素获得焦点时，触发focus事件。
+	//可以通过鼠标点击或者键盘上的TAB导航触发。这将触发所有绑定的focus函数，注意，某些对象不支持focus方法。
+	//#当页面加载后将 id 为 'login' 的元素设置焦点:
+	$(document).ready(function(){
+	  $("#login").focus();
+	});
+	//#使人无法使用文本框:
+	$("input[type=text]").focus(function(){
+	  this.blur();
+	});
+
+	//focusin([data],fn) 当元素获取焦点时，触发focusin事件。
+	//focusin 事件跟focus事件区别在于，他可以在父元素上检测子元素获取焦点的情况。
+	$("p").focusin(function(){
+		$(this).find("span").css("display","inline").fadeOut(1000);
+	});
+
+	//focusout([data],fn) 当元素失去焦点时触发focusout事件。
+	//focusout事件跟blur事件区别在于，他可以在父元素上检测子元素失去焦点的情况。
+	$("p").focusout(function() {
+	  $(this).find("span").css('display','inline').fadeOut(1000);
+	});
+
+	//keydown([[data],fn]) 当键盘或按钮被按下时，发生keydown事件。
+	//注释：如果在文档元素上进行设置，则无论元素是否获得焦点，该事件都会发生。
+	$("input").keydown(function(){
+	   $("input").css("background-color","yellow");
+	});
+	$("input").keyup(function(){
+	   $("input").css("background-color","pink");
+	});
+
+	//keypress([[data],fn]) 当键盘或按钮按下时，发生keypress事件。
+	//keypress事件和keydown事件类似。当按钮被按下时，会发生该事件。无论发生在当前获得焦点的元素上。不过，与keydown事件不同，每插入一个字符，就会发生keypress事件，注释：如果在文档元素上进行设置，则无论元素是否获得焦点，该事件都会发生。
+	/*$("input").keydown(function(){
+	  $("span").text(i+=1);
+	});*/
+
+	//keyup([[data],fn]) 当按钮被松开时，发生 keyup 事件。它发生在当前获得焦点的元素上。
+
+	//mousedown([[data],fn]) 当鼠标指针移动到元素上方，并按下鼠标按键时，会发生mousedown事件。
+	//mousedown 与 click事件不同，mousedown事件仅需要按键被按下，而不需要松开即可发生。
+ 
+	//resize([[data],fn]) 当调整浏览器窗口的大小时，发生resize事件
+	$(window).resize(function(){
+	  alert("正在调整浏览器窗口的大小!");
+	});
+
+	//scroll([[data],fn]) 当用户滚动指定的元素时，会发生scroll事件。
+	//scroll事件适用于所有可滚动的元素和window对象(浏览器窗口)。
+	$(window).scroll( function() { 
+	/* ...do something... */ 
+		console.log("scroll 123");
+	} );
+
+	//select([[data],fn])当textarea 或文本类型的input元素中的文本被选择时，会发生select事件。
+	//这个函数会调用执行绑定到select事件的所有函数，包括浏览器的默认行为。可以通过在某个绑定的函数中返回false来防止触发浏览器的默认行为。
+	//$("input[name='newsletter']").select(function(){
+	$("input[type='textarea']").select(function(){
+		console.log("input select 123");
+	});
+
+	//submit([[data],fn]) 当提交表单时，会发生 submit 事件。该事件只适用于表单元素。
+	$("form").submit( function () {
+		console.log('阻止表单提交');
+	  return false;
+	} );
+
+	//unload([[data],fn]) 在当用户离开页面时，会发生unload事件。
+	//具体来说，当发生以下情况时，会发生unload事件:
+	//. 点击某个离开页面的链接
+	//. 在地址栏输入了新的URL
+	//. 使用前进或后退按钮
+	//. 关闭浏览器
+	//. 重新加载页面
+	$(window).unload( function () { alert("Bye now!"); } );
+
+});
+</script>
+	
+
+</head>
+
+<body>
+	<form action="aa.php">
+		<p>123</p>
+		<button>点击</button>
+
+		<input type="text" value="Hello World">
+		<br><br>
+		<button>触发输入框的 select 事件</button>
+
+		<button id="old">.trigger("focus")</button>
+		<button id="new">.triggerHandler("focus")</button><br/><br/>
+		<input type="text" value="To Be Focused"/>
+
+		<div style="background-color:red">
+		<p>这是一个段落。</p>
+		<button>请点击这里</button>
+		</div>
+
+		<input type="checkbox">选中
+		<br>
+		<img src="https://www.runoob.com/try/demo_source/img_pulpitrock.jpg" alt="Pulpit rock" width="284" height="213">
+		<br>
+		<button>图片触发 error 事件</button>
+		<br>
+		<input type="text" name="login" id="login" > 
+
+
+		<p><input type="text" /> <span>focusout fire</span></p>
+		<p><input type="password" /> <span>focusout fire</span></p>
+
+		输入你的名字: <input type="textarea" name='newsletter'>
+		<p>在以上输入框中输入你的名字。在按键按下后输入框背景颜色会改变。</p>
+		<input type="submit" name="submit">
+	</form>
+</body>
+
+</html>

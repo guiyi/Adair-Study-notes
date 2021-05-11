@@ -1,0 +1,243 @@
+<html>
+
+<head>
+<title>003 选择器</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var all = $("*");
+	console.log(all);
+	var element = $("title");
+	//console.log(element);
+
+	//匹配当前获取焦点的元素。
+	$( "#content" ).delegate( "*", "focus blur", function( event ) {
+	    var elem = $( this );
+	    console.log(elem);
+	    setTimeout(function() {
+	       elem.toggleClass( "focused abc", elem.is( ":focus" ) );
+	    }, 0);
+	});
+	//选择该文档的根元素。
+	$(":root").css("background-color","yellow");
+
+	//选择由文档URI的格式化识别码表示的目标元素。
+	$("p, button, h1, h2").click(function(event){
+	  $("div").html("Triggered by a " + event.target.nodeName + " element.");
+	});
+
+	//匹配包含给定文本的元素
+	var contains = $("div:contains('John')");
+	funfor(contains);
+
+	//匹配所有不包含子元素或者文本的空元素
+	var empty = $("td:empty");
+	funfor(empty);
+
+	//匹配含有选择器所匹配的元素的元素
+	var has = $("div:has(p)").addClass("test");
+	funfor(has);
+
+	//匹配含有子元素或者文本的元素
+	var parent = $("td:parent");
+	funfor(parent);
+
+	//匹配所有不可见元素，或者type为hidden的元素
+	var hidden = $("tr:hidden");
+	funfor(hidden);
+
+	var hidden1 = $("input:hidden");
+	funfor(hidden1);
+
+	//匹配所有的可见元素
+	var visible = $("tr:visible");
+	funfor(visible);
+
+	//attribute 匹配包含给定属性的元素。
+	var attribute1 = $("div[id]");
+	funfor(attribute1);
+
+	//[attribute=value] 匹配给定的属性是某个特定值的元素
+	var attribute2 = $("input[name='newsletter']").attr("checked", true);
+	funfor(attribute2);
+	//[attribute!=value] 匹配所有不含有指定的属性，或者属性不等于特定值的元素。
+	var attribute3 = $("input[name!='newsletter']").attr("checked", true);
+	funfor(attribute3);
+	//[attribute^=value] 匹配给定的属性是以某些值开始的元素
+	var attribute4 = $("input[name^='news']");
+	funfor(attribute4);
+	//[attribute$=value] 匹配给定的属性是以某些值结尾的元素
+	var attribute5 = $("input[name$='letter']");
+	funfor(attribute5);
+
+	//[attribute*=value] 匹配给定的属性是以包含某些值的元素
+	var attribute6 = $("input[name*='man']");
+	funfor(attribute6,'attribute6 : ');
+
+	//复合属性选择器，需要同时满足多个条件时使用。
+	//找到所有含有 id 属性，并且它的 name 属性是以 man 结尾的
+	var selector1 = $("input[id][name$='man']");
+	funfor(selector1,'selector1 : ');
+
+	//匹配第一个子元素 ':first' 只匹配一个元素，而此选择符将为每个父元素匹配一个子元素
+	//在每个 ul 中查找第一个 li
+	var first_child = $("ul li:first-child");
+	funfor(first_child,'first_child : ');
+
+	//选择所有相同的元素名称的第一个兄弟元素。
+	//:first-of-type 选择器匹配元素，在文档树中，相同的父元素并且在其他相同的元素名称之前。
+	var first_of_type = $("div:first-of-type");
+	funfor(first_of_type,'first_of_type : ');
+
+	$("button:only-of-type").text("Alone").css("border", "20px blue solid");
+
+
+
+	//:input 匹配所有 input, textarea, select 和 button 元素
+	var input = $(":input");
+	funfor(input,'input : ');
+
+	//:text  匹配所有的单行文本框
+	var text = $(":text");
+	funfor(text,'text : ');
+
+	//:password  匹配所有密码框
+	var password = $(":password");
+	funfor(password,'password : ');
+
+
+ 	//:checked 匹配所有选中的被选中元素(复选框、单选框等，不包括select中的option)
+ 	var checked = $("input:checked");
+ 	funfor(checked,'checked : ');
+
+ 	//:selected 匹配所有选中的option元素
+ 	var selected = $("select option:selected")
+ 	funfor(selected,'selected : ');
+
+
+
+	//for 循环
+	function funfor(arr,msg='' ){
+        for(var i=0 ; i<arr.length ;i++){
+			console.log(msg,arr[i]);
+		}
+    }
+
+});
+</script>
+<style type="text/css">
+.focused {
+    background: #abcdef;
+}
+input:first-of-type
+{
+    background:#ff0000;
+}
+input:last-of-type
+{
+    background:green;
+}
+</style>
+</head>
+
+<body>
+<div id="content">
+    <input tabIndex="1">
+    <input tabIndex="2">
+    <select tabIndex="3">
+        <option>select menu</option>
+    </select>
+    <div tabIndex="4">
+        a div
+    </div>
+</div>
+<h1>我是h1</h1>
+
+<div>John Resig</div>
+<div>George Martin</div>
+<div>Malcom John Sinclair</div>
+<div>J. Ohn</div>
+
+<table>
+  <tr><td>Value 1</td><td></td></tr>
+  <tr><td>Value 2</td><td></td></tr>
+</table>
+
+
+<div><p>Hello</p></div>
+<div>Hello again!</div>
+
+<table>
+  <tr style="display:none"><td>Value 11</td></tr>
+  <tr ><td>Value 22</td></tr>
+</table>
+<form>
+  <input type="text" name="email" />
+  <input type="hidden" name="id" />
+</form>
+
+<div>
+  <p>Hello attribute!</p>
+</div>
+<div id="test2">attribute1</div>
+
+<input type="checkbox" name="newsletter" value="Hot Fuzz" />
+<input type="checkbox" name="newsletter" value="Cold Fusion" />
+<input type="checkbox" name="accept" value="Evil Plans" />
+
+<input id="letterman"  name="man-news" />
+<input name="newsletter" />
+<input name="milkmanletter" />
+<input id="letterman"  name="newsboyman" />
+<input name="letterman2" />
+
+
+<ul>
+  <li>John</li>
+  <li>Karl</li>
+  <li>Brandon</li>
+</ul>
+<ul>
+  <li>Glen</li>
+  <li>Tane</li>
+  <li>Ralph</li>
+</ul>
+
+<div>
+	<span>1</span>
+	<span>2</span>
+	<span>3</span>
+</div>
+
+
+<div>
+  <button>Sibling!</button>
+  <button>Sibling!</button>
+</div>
+ 
+<div>
+  <button>Sibling!</button>
+</div>
+<div>
+  None
+</div>
+ 
+<div>
+  <button>Sibling!</button>
+  <span>Sibling!</span>
+  <span>Sibling!</span>
+ 
+</div>
+<div>
+  <button>Sibling!</button>
+</div>
+
+
+ <textarea>textareatextareatextarea</textarea>
+ <input type="password" />
+
+
+
+</body>
+
+</html>

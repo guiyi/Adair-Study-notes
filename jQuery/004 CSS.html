@@ -1,0 +1,100 @@
+<html>
+
+<head>
+<title>004 CSS</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//css(name|pro|[,val|fn]) 访问匹配元素的样式属性。
+	$("p").css("color");
+	//将所有段落的字体颜色设为红色并且背景为蓝色。
+	$("p").css({ "color": "#ff0011", "background": "blue" ,"width":"200px"});
+	//将所有段落字体设为红色
+	$("p").css({ "color": "green"});
+	$("p").css("color","red");
+
+
+	$("div").click(function() {
+
+	    $(this).css({
+
+	      width: function(index, value) {
+
+	        return parseFloat(value) * 1.2;
+
+	      }, 
+
+	      height: function(index, value) {
+
+	        return parseFloat(value) * 1.2;
+
+	      }
+
+	    });
+
+	});
+
+	//offset() 用于设置或返回当前匹配元素相当于当前文档的偏移，也就是相当于当前文档的坐标。该函数值对可见元素有效。
+	//返回的对象包含两个整型属性：top和left，以像素计。此方法只对可见元素有效。
+	var p = $("p:last");
+	var offset = p.offset();
+	p.html( "left1: " + offset.left + ", top1: " + offset.top );
+	$("p:first").offset({ top: 10, left: 30 });
+
+	//position() 获取匹配元素相对父元素的偏移
+	//返回的对象包含两个整型属性：top 和 left。为精确计算结果，请在补白、边框和填充属性上使用像素单位。此方法只对可见元素有效。
+	var p = $("p:first");
+	var position = p.position();
+	console.log(position);
+	$("p:last").html("left2: "+position.left + ", top2: "+ position.top);
+	$("p:last").offset({ top: 100, left: 300 });
+	//$("p:last").html("left3: "+position.left + ", top3: "+ position.top);
+
+	//scrollTop([val])获取匹配元素相对滚动条顶部的偏移
+	//此方法对可见和隐藏元素均有效
+	var p = $("p:first");
+	//$("p:first").text( "scrollTop:" + p.scrollTop() );
+	$("p:last").text( "scrollTop:" + p.scrollTop() );
+	$("div.txt1").scrollTop(300);
+
+	
+	$("p:last").text( "height:" + $("p").height());
+	$("p:last").height(30);
+
+	$("p:last").text( "width:" + $("p").width());
+	$("p:last").width(100);
+
+	var p = $("p:first");
+	$("p:last").text( "innerHeight: " + p.innerHeight() +  " innerWidth: " + p.innerWidth());
+
+	//获取第一个匹配元素外部宽度（默认包括补白和边框）。
+	var p = $("p:first");
+	$("p:last").text( "outerHeight:" + p.outerHeight() + " outerWidth:" + p.outerWidth() );
+	
+
+
+});
+</script>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#txt1{
+		width: 10;
+		border: 3px solid red;
+	}
+</style>	
+
+</head>
+
+<body>
+<p> aaa </p>
+<div id="txt1"> div </div>
+
+
+<p>Hello</p><p>2nd Paragraph</p>
+
+</body>
+
+</html>

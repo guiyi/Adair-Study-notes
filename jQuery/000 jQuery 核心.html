@@ -1,0 +1,168 @@
+<html>
+
+<head>
+<title>000 jQuery 核心</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//each(callback) 以每一个匹配的元素作为上下文来执行一个函数。
+
+	$("img").each(function(i){
+	   this.src = "images/test" + i + ".jpg";
+	});
+	$("li").each(function(i){
+		$(this).toggleClass("example");
+	})
+
+	$("button").click(function(){
+		//console.log('abc');
+		//alert('111');
+		$("div").each(function(index,domEle)
+		{
+			//domEle == this
+			//$("span").css("backgroundColor","yewllow");
+			$(domEle).toggleClass("example1");
+			if($(this).is("#stop")){
+				console.log('abc');
+				$("span").text("Stoped at div div index #" + index);
+				return false;
+			}
+
+		});
+	});
+	
+
+	
+
+});
+
+$(document).ready(function(){
+	//index([selector|element]) 搜索匹配的元素，并返回相应元素的索引值，从0开始计数。
+
+	//1，传递一个DOM对象，返回这个对象在原先集合中的索引位置
+	console.log('index :'+ $('li').index(document.getElementById('bar')));
+	//1，传递一个jQuery对象 
+	console.log('index :'+ $('li').index($('#bar'))); 
+	//1，传递一组jQuery对象，返回这个对象中第一个元素在原先集合中的索引位置
+	console.log('index :'+ $('li').index($('li:gt(0)'))); 
+	//1，传递一个选择器，返回#bar在所有li中的做引位置
+	console.log('index :'+ $('#bar').index('li')); 
+	//1，不传递参数，返回这个元素在同辈中的索引位置。 
+	console.log('index :'+ $('#bar').index()); 
+
+});
+
+$(function(){
+	//data([key],[value]) 在元素上存放数据,返回jQuery对象。
+
+	console.log('1111');
+	
+	$("div").data("blah");  // undefined
+	$("div").data("blah", "hello");  // blah设置为hello
+	$("div").data("blah");  // hello
+	$("div").data("blah", 86);  // 设置为86
+	$("div").data("blah");  //  86
+	$("div").removeData("blah");  //移除blah
+	$("div").data("blah");  // undefined
+
+	$("div").data("test", { first: 16, last: "pizza!" });
+	console.log($("div").data("test").first)  //16;
+	console.log($("div").data("test").last)  //pizza!;
+
+	console.log($("div").data("test")); //this is test!;
+	
+});
+
+$(function(){
+	$("#show").click(function () {
+      var n = $("div").queue("fx");
+      $("span").text("Queue length is: " + n.length);
+	});
+	function runIt() {
+	      $("div").show("slow");
+	      $("div").animate({left:'+=200'},2000);
+	      $("div").slideToggle(1000);
+	      $("div").slideToggle("fast");
+	      $("div").animate({left:'-=200'},1500);
+	      $("div").hide("slow");
+	      $("div").show(1200);
+	      $("div").slideUp("normal", runIt);
+	}
+	runIt();
+
+
+	jQuery.extend({
+	  min: function(a, b) { return a < b ? a : b; },
+	  max: function(a, b) { return a > b ? a : b; }
+	});
+
+	console.log(jQuery.min(2,3)); // => 2
+	console.log(jQuery.max(4,5)); // => 5
+});
+
+
+
+	
+</script>
+
+<style type="text/css">
+	*{
+		margin: 0px;
+		padding: 10px;
+	}
+	.example{
+		width: 100px;
+		border:1px solid red;
+	}
+	.example1{
+		width: 100px;
+		border:1px solid red;
+		background-color: yellow;
+	}
+
+</style>
+</head>
+
+<body>
+<img/><img/>
+
+<ul>
+  <li id="foo">foo</li>
+  <li id="bar">bar</li>
+  <li id="baz">baz</li>
+</ul>
+
+<p></p><br/>
+
+<button>Change colors</button>
+<span></span> 
+<div></div> 
+<div></div>
+
+<div></div> 
+<div></div>
+<div id="stop">Stop here</div> 
+<div></div>
+
+<div></div>
+<div></div>
+
+<div data-test="this is test" ></div>
+
+
+<style>
+  div { margin:3px; width:40px; height:40px;
+        position:absolute; left:0px; top:30px; 
+        background:green; display:none; }
+  div.newcolor { background:blue; }
+  span { color:red; }
+</style>
+<button id="show">Show Length of Queue</button>
+<span></span>
+<div></div>
+
+
+
+</body>
+
+</html>
