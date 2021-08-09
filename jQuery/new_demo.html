@@ -5,7 +5,14 @@
 <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-
+$(function () { 
+	var arr = [ 4, "Pete", 8, "John" ];
+	var $spans = $( "span" );
+	$spans.eq( 0 ).text( jQuery.inArray( "John", arr ) );
+	$spans.eq( 1 ).text( jQuery.inArray( 4, arr ) );
+	$spans.eq( 2 ).text( jQuery.inArray( "Karl", arr ) );
+	$spans.eq( 3 ).text( jQuery.inArray( "Pete", arr, 2 ) );
+})
 });
 </script>
 	

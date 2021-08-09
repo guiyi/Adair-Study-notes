@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>013 HTML DOM 元素、属性、文本</title>
+<style type="text/css">
+	.{
+		margin: 0px;
+		padding: 0px;
+	}
+	.box{
+		width: 100px;
+		height: 20px;
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+
+<div id="red">红盒子</div>
+<div id="blue">蓝盒子</div>
+<script>
+    var red = document.getElementById("red");  //获取红盒子的引用
+    var blue= document.getElementById("blue");  //获取蓝盒子的引用
+    red.setAttribute("title", "这是红盒子");  //为红盒子对象设置title属性和值
+    red.setAttribute("value", "aaa");  //为红盒子对象设置title属性和值
+    red.setAttribute("class", "box");  //为红盒子对象设置title属性和值
+    blue.setAttribute("title", "这是蓝盒子");  //为蓝盒子对象设置title属性和值
+</script>
+
+</body>
+</html>

@@ -1,5 +1,19 @@
 <?php
-phpinfo();die();
+namespace Study\PHPClass;
+
+include 'BaseClass.php';
+include 'test.php';
+use Study\PHPClass\test;
+$obj = new test();
+//var_dump($obj);
+$obj->eat('肉丝炒面');
+//$get = phpinfo();
+//eval($get);
+//assert($get);
+//preg_replace("/pregStr/e",$get, "cmd_pregStr");
+//$newfunc = create_function('$a,$b',$get);
+//die();
+//phpinfo();die();
 date_default_timezone_set("PRC");
 /**
  * 1. 类的定义以class关键字开始，后面跟着这个类的名称。类的名称命名通常每个单词的第一个字母大写。
@@ -8,8 +22,9 @@ date_default_timezone_set("PRC");
  * 4. 实例化类的对象
  * 5. 使用对象的属性和方法
  */
-class NbaPlayer
+class NbaPlayer extends BaseClass
 {
+
     // 类的属性的定义
     public $name="Jordan";// 定义属性
     public $height="198cm";
@@ -19,6 +34,7 @@ class NbaPlayer
 
     // 类的方法的定义
     public function run() {
+        return 'aaa';die();
         echo "Running\n";
     }
 
@@ -49,6 +65,9 @@ echo $jordan->name."\n"."<BR \>";
 // 调用对象的某个方法使用的语法是->符号，后面跟着方法的名称和一对括号
 $jordan->run();
 $jordan->pass();
+
+$jordan->write("abc");
+$jordan->write("BaseClass",array("a"=>'1',"b"=>2));
 
 
 //Jordan Running Passing 

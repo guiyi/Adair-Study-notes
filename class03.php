@@ -1,4 +1,14 @@
 <?php
+namespace Study\PHPClass;
+
+require 'composer/vendor/autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+// create a log channel
+$log = new Logger('Study');
+$log->pushHandler(new StreamHandler('/tmp/your.log', Logger::WARNING));
+
 date_default_timezone_set("PRC");
 /**
  * 1. 对象引用的概念：对象的引用是访问对象属性和方法的媒介
@@ -7,6 +17,7 @@ date_default_timezone_set("PRC");
  * 4. 当指向对象的所有引用都被设为null时，对象的析构函数才被自动调用
  *    在PHP 中引用的意思是：不同的名字访问同一个变量内容。
  */
+
 class NbaPlayer
 {
     // 类的属性的定义
@@ -89,15 +100,18 @@ $b =&$a;
 echo $a."\n<BR \>";//这里输出:ABC
 echo $b."\n<BR \>";//这里输出:ABC
 $b="EFG";
-echo $a."\n<BR \>";//这里$a的值变为EFG 所以输出EFG
+
+$log->error($a);
+//echo $a."\n<BR \>";//这里$a的值变为EFG 所以输出EFG
 echo $b."\n<BR \>";//这里输出EFG
 $a = '123';
 echo $a."\n<BR \>";//这里$a的值变为123 所以输出123
 echo $b."\n<BR \>";//这里输出123
 
 
-unset ($a);
-echo $a."\n<BR \>";//Notice: Undefined variable: a 
+unset($a);
+$log->error($a);
+//echo $a."\n<BR \>";//Notice: Undefined variable: a 
 echo $b."\n<BR \>";//这里输出123
 
 

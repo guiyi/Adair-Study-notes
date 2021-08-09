@@ -1,0 +1,47 @@
+<html>
+
+<head>
+<title>014 form 阻止提交</title>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(function () { 
+			var arr = [ 4, "ROB0156-P", 8, "John" ];
+			var $spans = $( "span" );
+			$spans.eq( 0 ).text( jQuery.inArray( "John", arr ) );
+			$spans.eq( 1 ).text( jQuery.inArray( 4, arr ) );
+			$spans.eq( 2 ).text( jQuery.inArray( "Karl", arr ) );
+			$spans.eq( 3 ).text( jQuery.inArray( "Pete", arr, 2 ) );
+			alert($.inArray("ROB0156",arr));
+		})
+
+		//方式二
+		$("#selectPro").submit(function(event){
+			alert(222);
+			return false;
+	 
+
+		})
+	});
+
+	//方式一
+	function savePro() { 
+		alert(111);
+		 
+		return false; // 返回false，阻止跳转
+	}
+
+	
+</script>
+	
+
+</head>
+
+<body>
+<form id="selectPro" action="/test.php" method="post" onsubmit="return savePro()" > 
+	<button type="submit" value="ADD TO CART"/> aaaa</button>
+</form> 
+
+</body>
+
+</html>

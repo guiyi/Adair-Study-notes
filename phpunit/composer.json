@@ -1,0 +1,15 @@
+{
+    "name": "root/phpunit",
+    "autoload": {
+        "psr-4": {
+            "Root\\Phpunit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "126",
+            "email": "zouhongdai@126.com"
+        }
+    ],
+    "require": {}
+}

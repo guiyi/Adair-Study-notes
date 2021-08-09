@@ -9,6 +9,8 @@
     ],
     "require": {
         "cedaro/woocommerce-coupon-links": "^2.2",
-        "atelierdisko/coupon_code": "^1.0"
+        "atelierdisko/coupon_code": "^1.0",
+        "monolog/monolog": "^2.3",
+        "psr/log": "1.1.4"
     }
 }

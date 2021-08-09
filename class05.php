@@ -1,4 +1,6 @@
 <?php
+namespace Study\PHPClass;
+
 date_default_timezone_set("PRC");
 /**
  * 访问控制
