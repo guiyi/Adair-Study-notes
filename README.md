@@ -1,7 +1,7 @@
 # Adair 学习笔记
 
 <p align="center">
-  <a href="https://github.com/guiyi/PHP">
+  <a href="https://github.com/guiyi/Adair-Study-notes/tree/master/PHP">
     <img src="https://img.shields.io/badge/PHP-done-brightgreen.svg" alt="PHP">
   </a>
   <a href="https://github.com/guiyi/python">
@@ -9,7 +9,7 @@
   </a>
   
   <a href="https://github.com/guiyi/shell">
-    <img src="https://img.shields.io/badge/shell-doing-blue.svg" alt="Shell">
+    <img src="https://img.shields.io/badge/Shell-doing-blue.svg" alt="Shell">
   </a>
   
   
