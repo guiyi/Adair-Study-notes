@@ -3,7 +3,7 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "Zwdfrobot@";
+$password = "aaaa@";
 //$dbname = "df_opencartv4";
 
 $dbname = "df_forumv2";
