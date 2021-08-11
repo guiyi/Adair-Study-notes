@@ -54,7 +54,7 @@
 
 <p align="center">
   <a href="https://www.dfrobot.com">
-      <img src="https://img.shields.io/badge/开发&维护 DFRobot.com-doing-bule.svg" alt="DFRobot.com">
+      <img src="https://img.shields.io/badge/开发&维护 DFRobot.com-doing-blue.svg" alt="DFRobot.com">
   </a>
 </p>
 
