@@ -23,7 +23,7 @@
     <img src="https://img.shields.io/badge/Redis-doing-blue.svg" alt="Redis">
   </a>
   <a href="https://github.com/guiyi/PHP/tree/master/mongodb">
-    <img src="https://img.shields.io/badge/Mongodb-doing-blue.svg" alt="Mongodb">
+    <img src="https://img.shields.io/badge/MongoDB-doing-blue.svg" alt="MongoDB">
   </a>
 </p>
 <p align="center">
