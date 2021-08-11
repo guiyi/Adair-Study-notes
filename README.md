@@ -1,10 +1,10 @@
 # Adair 学习笔记
 
 <p align="center">
-  <a href="https://github.com/guiyi/PHP/tree/master/PHP">
+  <a href="https://github.com/guiyi/PHP">
     <img src="https://img.shields.io/badge/PHP-done-brightgreen.svg" alt="PHP">
   </a>
-  <a href="https://github.com/guiyi/PHP/tree/master/PHP">
+  <a href="https://github.com/guiyi/python">
     <img src="https://img.shields.io/badge/Python-doing-blue.svg" alt="Python">
   </a>
   
